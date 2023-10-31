@@ -45,7 +45,7 @@ Now Combine (stack) the two dataframes into one combined dataframe, so all the r
 
 combined_df <- bind_rows(primary_dem, primary_rep)
 
-
+Here i am creating a new combined dataframe under the name combined_df 
 
 
 ```
@@ -83,7 +83,7 @@ Next use left_join() to join the two tables based on the unique combination of p
 
   by = c("precinct" = "precinct", "county" = "county")
 
-
+Here I am following the instructions, doing a left join. Here I am including all the infromation from the first table and joining it with information from the second table that matches.
 
 ```
 
@@ -95,9 +95,12 @@ Write code to produce a `votes` column which is the result of adding together `e
 
 ```{r}
 
-combined_df <- combined_df %>% 
+combined_df %>% 
   mutate(total_votes = early_votes + election_night_votes + provisional_votes + mail_in_ballot_1_votes + mail_in_ballot_2_votes)
 
+print(combined_df)
+
+Here I used the mutate function to create a new column, naming it total votes, then adding all the values i wanted in the total votes column.
 ```
 
 Next, separately write code to show each county and precinct and calculate the total votes in the Governor's race - bearing in mind that each precinct will have multiple rows in the dataframe, but you only want to see one row for each precinct. (So you'll want to use grouping and summarizing.)
@@ -107,14 +110,13 @@ Next, separately write code to show each county and precinct and calculate the t
 governor_totals <- combined_df %>%
   group_by(county_name, election_district_precinct) %>%
   summarize(total_votes = sum(total_votes)) %>%
-  
-
+  arrange(desc(total_votes))
 
 print(governor_totals)
 
 ```
 
-What is the name and voting location of the precinct that saw the most votes in the governor's race? *Put answer here*
+What is the name and voting location of the precinct that saw the most votes in the governor's race? Prince George's County, Precinct 15005
 
 ### Q2.
 
