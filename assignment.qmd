@@ -45,10 +45,11 @@ Now Combine (stack) the two dataframes into one combined dataframe, so all the r
 
 combined_df <- bind_rows(primary_dem, primary_rep)
 
-Here i am creating a new combined dataframe under the name combined_df 
+
 
 
 ```
+Here i am creating a new combined dataframe under the name combined_df 
 
 Then use janitor's clean_names() function to clean up the column names so all spaces, punctuation and letter cases are dealt with.
 
@@ -83,9 +84,10 @@ Next use left_join() to join the two tables based on the unique combination of p
 
   by = c("precinct" = "precinct", "county" = "county")
 
-Here I am following the instructions, doing a left join. Here I am including all the infromation from the first table and joining it with information from the second table that matches.
 
 ```
+
+Here I am following the instructions, doing a left join. Here I am including all the information from the first table and joining it with information from the second table that matches.
 
 ## Answer questions
 
