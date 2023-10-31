@@ -133,7 +133,7 @@ governor_totals %>%
 
 How many precincts are there, and which county has the most? 12 Precincts. The county that has the most is Prince George's County.
 
-What else would you need to know about these precincts to know whether this might be worth a story? *Put answer here*
+What else would you need to know about these precincts to know whether this might be worth a story? A common variable between them, like demographics.
 
 ### Q3.
 
