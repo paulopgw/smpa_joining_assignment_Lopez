@@ -1,6 +1,6 @@
 ---
 title: "Joining Assignment"
-author: "Put Name Here"
+author: "Paulina Lopez"
 date: "`r format(Sys.time(), '%B %d, %Y')`"
 format:
   html:
@@ -43,7 +43,7 @@ Now Combine (stack) the two dataframes into one combined dataframe, so all the r
 
 ```{r}
 
-
+combined_df <- bind_rows(primary_dem, primary_rep)
 
 
 
@@ -61,7 +61,7 @@ To use clean_names() you apply it to your dataframe like:
 ```{r}
 
 
-
+combined_df <- combined_df %>% clean_names()
 
 
 ```
@@ -81,7 +81,7 @@ Next use left_join() to join the two tables based on the unique combination of p
 ```{r}
 
 
-
+  by = c("precinct" = "precinct", "county" = "county")
 
 
 
@@ -95,7 +95,8 @@ Write code to produce a `votes` column which is the result of adding together `e
 
 ```{r}
 
-
+combined_df <- combined_df %>% 
+  mutate(total_votes = early_votes + election_night_votes + provisional_votes + mail_in_ballot_1_votes + mail_in_ballot_2_votes)
 
 ```
 
@@ -103,9 +104,13 @@ Next, separately write code to show each county and precinct and calculate the t
 
 ```{r}
 
+governor_totals <- combined_df %>%
+  group_by(county_name, election_district_precinct) %>%
+  summarize(total_votes = sum(total_votes)) %>%
+  
 
 
-
+print(governor_totals)
 
 ```
 
@@ -118,13 +123,15 @@ Let's look at the average number of votes in each party's primary race for gover
 ```{r}
 
 
+governor_totals %>%
+  filter(total_votes == 0)
 
 
 
 
 ```
 
-How many precincts are there, and which county has the most? *Put answer here*
+How many precincts are there, and which county has the most? 12 Precincts. The county that has the most is Prince George's County.
 
 What else would you need to know about these precincts to know whether this might be worth a story? *Put answer here*
 
@@ -136,8 +143,9 @@ First write the question and then try to answer it by writing code. If you're no
 
 ```{r}
 
+Question:
+"In which county did the Republican candidate receive the highest number of votes in the Governor's race, and how many votes did they receive?"
 
-
-
+To answer this question I would use the governor_totals dataframe and look for highest number of votes using "desc" to put in descending order.
 
 ```
